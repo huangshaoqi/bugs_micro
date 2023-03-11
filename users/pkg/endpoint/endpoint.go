@@ -3,7 +3,7 @@ package endpoint
 import (
 	"context"
 	endpoint "github.com/go-kit/kit/endpoint"
-	service "users/pkg/service"
+	service "github.com/huangshaoqi/bugs_micro/users/pkg/service"
 )
 
 // CreateRequest collects the request parameters for the Create method.

@@ -1,8 +1,8 @@
 package main
 
 import (
-	service "bugs/cmd/service"
 	"fmt"
+	service "github.com/huangshaoqi/bugs_micro/bugs/cmd/service"
 )
 
 func main() {

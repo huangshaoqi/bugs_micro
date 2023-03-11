@@ -7,6 +7,9 @@ import (
 	endpoint1 "github.com/go-kit/kit/endpoint"
 	log "github.com/go-kit/kit/log"
 	prometheus "github.com/go-kit/kit/metrics/prometheus"
+	endpoint "github.com/huangshaoqi/bugs_micro/users/pkg/endpoint"
+	http1 "github.com/huangshaoqi/bugs_micro/users/pkg/http"
+	service "github.com/huangshaoqi/bugs_micro/users/pkg/service"
 	lightsteptracergo "github.com/lightstep/lightstep-tracer-go"
 	group "github.com/oklog/oklog/pkg/group"
 	opentracinggo "github.com/opentracing/opentracing-go"
@@ -22,9 +25,6 @@ import (
 	appdash "sourcegraph.com/sourcegraph/appdash"
 	opentracing "sourcegraph.com/sourcegraph/appdash/opentracing"
 	"syscall"
-	endpoint "users/pkg/endpoint"
-	http1 "users/pkg/http"
-	service "users/pkg/service"
 )
 
 var tracer opentracinggo.Tracer

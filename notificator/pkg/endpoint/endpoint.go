@@ -3,7 +3,7 @@ package endpoint
 import (
 	"context"
 	endpoint "github.com/go-kit/kit/endpoint"
-	service "notificator/pkg/service"
+	service "github.com/huangshaoqi/bugs_micro/notificator/pkg/service"
 )
 
 // SendEmailRequest collects the request parameters for the SendEmail method.

@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	service "notificator/cmd/service"
+	service "github.com/huangshaoqi/bugs_micro/notificator/cmd/service"
 )
 
 func main() {

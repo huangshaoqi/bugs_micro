@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package pb;
 
-option go_package = "notificator/pkg/grpc/pb";
+option go_package = "github.com/huangshaoqi/bugs_micro/notificator/pkg/grpc/pb";
 
 
 //The Notificator service definition.

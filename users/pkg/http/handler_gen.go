@@ -3,8 +3,8 @@ package http
 
 import (
 	http "github.com/go-kit/kit/transport/http"
+	endpoint "github.com/huangshaoqi/bugs_micro/users/pkg/endpoint"
 	http1 "net/http"
-	endpoint "users/pkg/endpoint"
 )
 
 // NewHTTPHandler returns a handler that makes a set of endpoints available on

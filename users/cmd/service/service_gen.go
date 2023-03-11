@@ -7,11 +7,11 @@ import (
 	prometheus "github.com/go-kit/kit/metrics/prometheus"
 	opentracing "github.com/go-kit/kit/tracing/opentracing"
 	http "github.com/go-kit/kit/transport/http"
+	endpoint "github.com/huangshaoqi/bugs_micro/users/pkg/endpoint"
+	http1 "github.com/huangshaoqi/bugs_micro/users/pkg/http"
+	service "github.com/huangshaoqi/bugs_micro/users/pkg/service"
 	group "github.com/oklog/oklog/pkg/group"
 	opentracinggo "github.com/opentracing/opentracing-go"
-	endpoint "users/pkg/endpoint"
-	http1 "users/pkg/http"
-	service "users/pkg/service"
 )
 
 func createService(endpoints endpoint.Endpoints) (g *group.Group) {

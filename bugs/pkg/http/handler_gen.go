@@ -2,8 +2,8 @@
 package http
 
 import (
-	endpoint "bugs/pkg/endpoint"
 	http "github.com/go-kit/kit/transport/http"
+	endpoint "github.com/huangshaoqi/bugs_micro/bugs/pkg/endpoint"
 	http1 "net/http"
 )
 

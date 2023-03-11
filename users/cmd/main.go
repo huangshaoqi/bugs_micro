@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	service "users/cmd/service"
+	service "github.com/huangshaoqi/bugs_micro/users/cmd/service"
 )
 
 func main() {

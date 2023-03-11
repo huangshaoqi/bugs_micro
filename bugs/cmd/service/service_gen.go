@@ -2,14 +2,14 @@
 package service
 
 import (
-	endpoint "bugs/pkg/endpoint"
-	http1 "bugs/pkg/http"
-	service "bugs/pkg/service"
 	endpoint1 "github.com/go-kit/kit/endpoint"
 	log "github.com/go-kit/kit/log"
 	prometheus "github.com/go-kit/kit/metrics/prometheus"
 	opentracing "github.com/go-kit/kit/tracing/opentracing"
 	http "github.com/go-kit/kit/transport/http"
+	endpoint "github.com/huangshaoqi/bugs_micro/bugs/pkg/endpoint"
+	http1 "github.com/huangshaoqi/bugs_micro/bugs/pkg/http"
+	service "github.com/huangshaoqi/bugs_micro/bugs/pkg/service"
 	group "github.com/oklog/oklog/pkg/group"
 	opentracinggo "github.com/opentracing/opentracing-go"
 )
