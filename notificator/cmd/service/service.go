@@ -105,12 +105,12 @@ func Run() {
 
 func registerService(logger log.Logger) (*sdetcd.Registrar, error) {
 	var (
-		etcdServer = "http://etcd:2379"
-		prefix     = "/services/notificator/"
-		instance   = "notificator:8082"
-		key        = prefix + instance
+		etcdServers = []string{"http://etcd1:2379", "http://etcd2:2379", "http://etcd3:2379"}
+		prefix      = "/services/notificator/"
+		instance    = "notificator:8082"
+		key         = prefix + instance
 	)
-	client, err := sdetcd.NewClient(context.Background(), []string{etcdServer}, sdetcd.ClientOptions{})
+	client, err := sdetcd.NewClient(context.Background(), etcdServers, sdetcd.ClientOptions{})
 	if err != nil {
 		return nil, err
 	}

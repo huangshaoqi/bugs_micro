@@ -89,6 +89,7 @@ func Run() {
 	g := createService(eps)
 	initMetricsEndpoint(g)
 	initCancelInterrupt(g)
+
 	logger.Log("exit", g.Run())
 
 }
