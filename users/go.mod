@@ -1,4 +1,4 @@
-module users
+module github.com/huangshaoqi/bugs_micro/users
 
 go 1.19
 

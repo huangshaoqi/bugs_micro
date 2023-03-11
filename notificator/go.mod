@@ -1,4 +1,4 @@
-module notificator
+module github.com/huangshaoqi/bugs_micro/notificator
 
 go 1.19
 

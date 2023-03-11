@@ -1,4 +1,4 @@
-module bugs
+module github.com/huangshaoqi/bugs_micro/bugs
 
 go 1.19
 
