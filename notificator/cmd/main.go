@@ -7,5 +7,5 @@ import (
 
 func main() {
 	service.Run()
-	fmt.Println("test notificator")
+	fmt.Println("test notificator 1")
 }

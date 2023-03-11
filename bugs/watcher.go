@@ -31,6 +31,7 @@ func main() {
 			select {
 			case event := <-w.Event:
 				fmt.Println(event) // Print the event's info.
+
 				// TODO
 			case err := <-w.Error:
 				log.Fatalln(err)

@@ -4,11 +4,18 @@ networks:
   etcd-net: # 网络
     driver: bridge    # 桥接模式
 volumes:
+
   etcd1_data:         # 挂载到本地的数据卷名
     driver: local
   etcd2_data:
     driver: local
   etcd3_data:
+    driver: local
+  users:
+    driver: local
+  bugs:
+    driver: local
+  notificator:
     driver: local
 
 services:
@@ -32,7 +39,7 @@ services:
       - ETCD_INITIAL_CLUSTER=etcd1=http://etcd1:2380,etcd2=http://etcd2:2380,etcd3=http://etcd3:2380 # 为启动初始化集群配置
       - ETCD_INITIAL_CLUSTER_STATE=new                      # 初始化集群状态
     volumes:
-      - etcd1_data:/bitnami/etcd                            # 挂载的数据卷
+      - /Users/huangshaoqi/Data/gowork/2023/bugs_micro/etcd1_data:/bitnami/etcd                            # 挂载的数据卷
 
   etcd2:
     image: bitnami/etcd:latest
@@ -54,7 +61,7 @@ services:
       - ETCD_INITIAL_CLUSTER=etcd1=http://etcd1:2380,etcd2=http://etcd2:2380,etcd3=http://etcd3:2380
       - ETCD_INITIAL_CLUSTER_STATE=new
     volumes:
-      - etcd2_data:/bitnami/etcd
+      - /Users/huangshaoqi/Data/gowork/2023/bugs_micro/etcd2_data:/bitnami/etcd
 
   etcd3:
     image: bitnami/etcd:latest
@@ -76,7 +83,7 @@ services:
       - ETCD_INITIAL_CLUSTER=etcd1=http://etcd1:2380,etcd2=http://etcd2:2380,etcd3=http://etcd3:2380
       - ETCD_INITIAL_CLUSTER_STATE=new
     volumes:
-      - etcd3_data:/bitnami/etcd
+      - /Users/huangshaoqi/Data/gowork/2023/bugs_micro/etcd3_data:/bitnami/etcd
 
   ### etcd 其他环境配置见
   bugs:
@@ -90,7 +97,7 @@ services:
     - 8800:8081
     restart: always
     volumes:
-    - ./bugs:/go_work/bugs
+    - /Users/huangshaoqi/Data/gowork/2023/bugs_micro/bugs:/go_work/bugs
   notificator:
     networks:
       - etcd-net
@@ -102,7 +109,7 @@ services:
     - 8802:8082
     restart: always
     volumes:
-    - ./notificator:/go_work/notificator
+    - /Users/huangshaoqi/Data/gowork/2023/bugs_micro/notificator:/go_work/notificator
   users:
     networks:
       - etcd-net
@@ -114,7 +121,7 @@ services:
     - 8801:8081
     restart: always
     volumes:
-    - ./users:/go_work/users
+    - /Users/huangshaoqi/Data/gowork/2023/bugs_micro/users:/go_work/users
 
 
   ### etcd 其他环境配置见：https://doczhcn.gitbook.io/etcd/index/index-1/configuration

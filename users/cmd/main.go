@@ -7,5 +7,5 @@ import (
 
 func main() {
 	service.Run()
-	fmt.Println("test users")
+	fmt.Println("test users 1")
 }
