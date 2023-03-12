@@ -102,6 +102,24 @@ kit generate docker
 ```
 
 这个命令生成了 Dockerfile 和带有端口映射的 docker-compose.yml 。将它运行起来并调用 /create 接口 。
+修改 users/Dockerfile,bugs/Dockerfile,notificator/Dockerfile
+以下是 bugs/Dockerfile 配置文件，其他两个照搬
+
+```Dockerfile
+FROM golang:1.19
+WORKDIR /go_work/bugs
+
+ADD bugs .
+
+RUN go env -w GOPROXY="https://goproxy.cn,direct"
+RUN go env -w GO111MODULE=auto
+
+RUN go install github.com/radovskyb/watcher/cmd/watcher@latest && go mod tidy
+
+ENTRYPOINT  ./start.sh && watcher -ignore "log.txt" -ignore "nohup.out" -cmd='./restart.sh'
+
+
+```
 
 ```bash
 docker-compose up
@@ -300,7 +318,7 @@ func (e Endpoints) SendEmail(ctx context.Context, email string, content string) 
 如果我们搜索 TODO grep -R "TODO" notificator ，可以看到还需要实现 gRPC 请求和响应的编码和解码。
 notificator/pkg/grpc/handler.go:
 
-````golang
+```golang
 package grpc
 
 import (
@@ -337,8 +355,8 @@ func (g *grpcServer) SendEmail(ctx context.Context, req *pb.SendEmailRequest) (*
 	}
 	return rep.(*pb.SendEmailReply), nil
 }
-
 ```
+
 服务发现
 SendEmail 接口将由用户服务调用，所以用户服务必须知道通知服务的地址，这是典型的服务发现问题。在本地环境中，我们使用 Docker Compose 部署时知道如何连接服务，但是，在实际的分布式环境中，可能会遇到其他问题。
 
@@ -472,7 +490,7 @@ services:
     restart: always
     volumes:
     - /Users/huangshaoqi/Data/gowork/2023/bugs_micro/users:/go_work/users
-````
+```
 
 在 etcd 中注册通知服务 notificator/cmd/service/service.go：
 
@@ -766,7 +784,7 @@ func New(middleware []Middleware) UsersService {
 因为我们只有一个服务，所以只获取到了一个连接，但实际系统中可能有上百个服务，所以我们可以应用一些逻辑来进行实例选择，例如轮询。
 现在让我们启动用户服务来测试一下：
 
-```
+```bash
 cd bugs_micro
 docker-compose up
 ```
