@@ -4,6 +4,13 @@ import (
 	"context"
 	"flag"
 	"fmt"
+	"net"
+	http2 "net/http"
+	"os"
+	"os/signal"
+	"syscall"
+	"time"
+
 	endpoint1 "github.com/go-kit/kit/endpoint"
 	log "github.com/go-kit/kit/log"
 	prometheus "github.com/go-kit/kit/metrics/prometheus"
@@ -18,13 +25,8 @@ import (
 	http "github.com/openzipkin/zipkin-go/reporter/http"
 	prometheus1 "github.com/prometheus/client_golang/prometheus"
 	promhttp "github.com/prometheus/client_golang/prometheus/promhttp"
-	"net"
-	http2 "net/http"
-	"os"
-	"os/signal"
 	appdash "sourcegraph.com/sourcegraph/appdash"
 	opentracing "sourcegraph.com/sourcegraph/appdash/opentracing"
-	"syscall"
 )
 
 var tracer opentracinggo.Tracer
@@ -49,7 +51,11 @@ func Run() {
 
 	// Create a single logger, which we'll use and give to other components.
 	logger = log.NewLogfmtLogger(os.Stderr)
-	logger = log.With(logger, "ts", log.DefaultTimestampUTC)
+
+	var cstZone = time.FixedZone("CST", 8*3600)
+	logger = log.With(logger, "ts", log.TimestampFormat(func() time.Time {
+		return time.Now().In(cstZone)
+	}, "2006-01-02 15:04:05.000+08:00"))
 	logger = log.With(logger, "caller", log.DefaultCaller)
 
 	//  Determine which tracer to use. We'll pass the tracer to all the

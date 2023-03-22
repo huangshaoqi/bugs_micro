@@ -15,7 +15,7 @@ volumes:
 
 services:
  etcd1:
-   image: bitnami/etcd:latest  # 镜像
+   image: pachyderm/etcd:v3.5.2-arm64  # 镜像
    container_name: etcd1       # 容器名 --name
    restart: always             # 总是重启
    networks:
@@ -24,6 +24,7 @@ services:
      - "20000:2379"
      - "20001:2380"
    environment: # 环境变量 --env
+     - TZ=Asia/Shanghai
      - ALLOW_NONE_AUTHENTICATION=yes                       # 允许不用密码登录
      - ETCD_NAME=etcd1                                     # etcd 的名字
      - ETCD_INITIAL_ADVERTISE_PEER_URLS=http://etcd1:2380  # 列出这个成员的伙伴 URL 以便通告给集群的其他成员
@@ -37,7 +38,7 @@ services:
    #   - /Users/huangshaoqi/Data/gowork/2023/bugs_micro/etcd1_data:/bitnami/etcd                            # 挂载的数据卷
 
  etcd2:
-   image: bitnami/etcd:latest
+   image: pachyderm/etcd:v3.5.2-arm64
    container_name: etcd2
    restart: always
    networks:
@@ -46,6 +47,7 @@ services:
      - "20002:2379"
      - "20003:2380"
    environment:
+     - TZ=Asia/Shanghai
      - ALLOW_NONE_AUTHENTICATION=yes
      - ETCD_NAME=etcd2
      - ETCD_INITIAL_ADVERTISE_PEER_URLS=http://etcd2:2380
@@ -59,7 +61,7 @@ services:
    #   - /Users/huangshaoqi/Data/gowork/2023/bugs_micro/etcd2_data:/bitnami/etcd
 
  etcd3:
-   image: bitnami/etcd:latest
+   image: pachyderm/etcd:v3.5.2-arm64
    container_name: etcd3
    restart: always
    networks:
@@ -68,6 +70,7 @@ services:
      # - "20004:2379"
      - "20005:2380"
    environment:
+     - TZ=Asia/Shanghai
      - ALLOW_NONE_AUTHENTICATION=yes
      - ETCD_NAME=etcd3
      - ETCD_INITIAL_ADVERTISE_PEER_URLS=http://etcd3:2380
@@ -91,6 +94,8 @@ services:
     ports:
       - 8800:8081
     restart: always
+    environment: # 环境变量 --env
+      - TZ:Asia/Shanghai
 
  notificator:
    networks:
@@ -102,6 +107,8 @@ services:
    ports:
       - 8802:8082
    restart: always
+   environment: # 环境变量 --env
+      - TZ:Asia/Shanghai
 
  users:
    networks:
@@ -113,8 +120,5 @@ services:
    ports:
       - 8801:8081
    restart: always
-
-
-
-  ## etcd 其他环境配置见：https://doczhcn.gitbook.io/etcd/index/index-1/configuration
-
+   environment: # 环境变量 --env
+      - TZ:Asia/Shanghai
