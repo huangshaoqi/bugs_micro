@@ -16,4 +16,4 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
     && apk add --no-cache tzdata
 
 COPY --from=builder /go_work/notificator/notificator /go_work/notificator/
-ENTRYPOINT ./notificator
+ENTRYPOINT ["./notificator"]

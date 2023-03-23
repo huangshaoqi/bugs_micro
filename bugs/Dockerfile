@@ -16,4 +16,4 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
     && apk add --no-cache tzdata
 
 COPY --from=builder /go_work/bugs/bugs /go_work/bugs/
-ENTRYPOINT ./bugs
+ENTRYPOINT ["./bugs"]
